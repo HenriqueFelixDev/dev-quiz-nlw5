@@ -3,6 +3,12 @@ import 'package:dev_quiz/core/core.dart';
 import '../chart_progress/chart_progress_widget.dart';
 
 class ScoreCardWidget extends StatelessWidget {
+  final double score;
+  ScoreCardWidget({
+    Key? key,
+    this.score = 0.0
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +22,7 @@ class ScoreCardWidget extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(right: 32.0),
-            child: ChartProgressWidget(),
+            child: ChartProgressWidget(progress: score),
           ),
           Expanded(
             child: Column(

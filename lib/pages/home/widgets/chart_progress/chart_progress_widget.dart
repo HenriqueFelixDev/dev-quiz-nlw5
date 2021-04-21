@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:dev_quiz/core/core.dart';
 
 class ChartProgressWidget extends StatelessWidget {
+  final double progress;
+  ChartProgressWidget({
+    Key? key,
+    this.progress = 0.0
+  }) 
+    : assert(progress >= 0.0 && progress <= 1.0),
+      super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +21,7 @@ class ChartProgressWidget extends StatelessWidget {
               height: 80.0,
               width: 80.0,
               child: CircularProgressIndicator(
-                value: 0.75,
+                value: progress,
                 strokeWidth: 10.0,
                 backgroundColor: AppColors.chartSecondary,
                 valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
@@ -22,7 +29,7 @@ class ChartProgressWidget extends StatelessWidget {
             )
           ),
           Center(
-            child: Text('75%', style: AppTextStyles.heading)
+            child: Text('${(progress * 100).round()}%', style: AppTextStyles.heading)
           )
         ]
       )

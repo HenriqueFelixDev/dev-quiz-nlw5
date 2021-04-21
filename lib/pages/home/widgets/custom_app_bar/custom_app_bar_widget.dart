@@ -1,10 +1,16 @@
+import 'package:dev_quiz/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_quiz/core/core.dart';
 import '../score_card/score_card_widget.dart';
 import '../user_avatar/user_avatar_widget.dart';
 
 class CustomAppBarWidget extends PreferredSize {
-  CustomAppBarWidget() : super(
+  UserModel user;
+  CustomAppBarWidget({
+    Key? key,
+    required this.user
+  }) : super(
+    key: key,
     preferredSize: Size.fromHeight(250.0),
     child: Container(
       height: 250.0,
@@ -25,13 +31,13 @@ class CustomAppBarWidget extends PreferredSize {
                     style: AppTextStyles.title,
                     children: [
                       TextSpan(
-                        text: 'HenriqueFelixDev',
+                        text: user.name,
                         style: AppTextStyles.titleBold
                       )
                     ]
                   )
                 ),
-                UserAvatarWidget(imageURL: 'https://avatars.githubusercontent.com/u/47118693?v=4')
+                UserAvatarWidget(imageURL: user.photoURL)
               ]
             )
           ),
@@ -39,7 +45,7 @@ class CustomAppBarWidget extends PreferredSize {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ScoreCardWidget()
+              child: ScoreCardWidget(score: user.score)
             )
           )
         ]

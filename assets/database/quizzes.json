@@ -1,0 +1,64 @@
+[
+  {
+    "title": "Gerenciamento de Estado",
+    "questionsAnswered": 1,
+    "icon": "blocks",
+    "level": "facil",
+    "questions": [
+      {
+        "title": "Quais das seguintes opções não é um package de gerência de estados do Flutter:",
+        "answers": [
+          {
+            "title": "URL Launcher",
+            "isRight": true
+          },
+          {
+            "title": "Provider"
+          },
+          {
+            "title": "MobX"
+          },
+          {
+            "title": "Bloc"
+          }
+        ]
+      },
+      {
+        "title": "Qual a utilidade da gerência de estado?",
+        "answers": [
+          {
+            "title": "Trata do gerenciamento de como os diferentes estados da aplicação se comportarão na aplicação e quais ações devem ser realizadas ao ocorrer a mudança desses estados",
+            "isRight": true
+          },
+          {
+            "title": "Permite a criação de interfaces mais bonitas e com uma melhor experiência do usuário"
+          },
+          {
+            "title": "Permite armazenar dados no dispositivo para serem utilizados sempre que necessário"
+          },
+          {
+            "title": "Trata do acesso a dados externos, geralmente vindos de uma API"
+          }
+        ]
+      },
+      {
+        "title": "Qual tipo de dado o bloc utiliza no gerenciamento de estados?",
+        "answers": [
+          {
+            "title": "Streams",
+            "isRight": true
+          },
+          {
+            "title": "Strings"
+          },
+          {
+            "title": "Futures"
+          },
+          {
+            "title": "Listeners"
+          }
+        ]
+      }
+    ]
+  }
+]
