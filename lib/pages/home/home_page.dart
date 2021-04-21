@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset('assets/images/no_data.svg', width: 150.0),
+                    SvgPicture.asset(AppImages.noData, width: 150.0),
                     SizedBox(height: 16.0),
                     Text(
                       'Nenhum resultado encontrado!', 
