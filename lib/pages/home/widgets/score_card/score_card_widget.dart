@@ -1,7 +1,6 @@
-import 'package:dev_quiz/core/app_colors.dart';
-import 'package:dev_quiz/core/app_text_styles.dart';
-import 'package:dev_quiz/pages/home/widgets/chart_progress_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:dev_quiz/core/core.dart';
+import '../chart_progress/chart_progress_widget.dart';
 
 class ScoreCardWidget extends StatelessWidget {
   @override

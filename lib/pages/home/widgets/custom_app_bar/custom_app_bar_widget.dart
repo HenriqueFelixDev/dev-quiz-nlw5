@@ -1,8 +1,7 @@
-import 'package:dev_quiz/core/app_gradients.dart';
-import 'package:dev_quiz/core/app_text_styles.dart';
-import 'package:dev_quiz/pages/home/widgets/score_card_widget.dart';
-import 'package:dev_quiz/pages/home/widgets/user_avatar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:dev_quiz/core/core.dart';
+import '../score_card/score_card_widget.dart';
+import '../user_avatar/user_avatar_widget.dart';
 
 class CustomAppBarWidget extends PreferredSize {
   CustomAppBarWidget() : super(
