@@ -56,5 +56,6 @@ Obs: Caso você não possua um emulador de smartphone (Android ou IOS) em seu co
 
 ## Features extras
 As seguintes features serão implementadas para incrementar o aplicativo:
+ - [x] Snackbar de feedback ao selecionar uma alternativa
  - [ ] Login com o GitHub (Firebase Auth)
  - [ ] Questões e dados do usuário vindos do firebase

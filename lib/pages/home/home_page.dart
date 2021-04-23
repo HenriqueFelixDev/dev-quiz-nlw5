@@ -1,5 +1,6 @@
 import 'package:dev_quiz/core/app_colors.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/pages/challenge/challenge_page.dart';
 import 'package:dev_quiz/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_quiz/core/app_images.dart';
@@ -106,7 +107,13 @@ class _HomePageState extends State<HomePage> {
                       title: quiz.title,
                       icon: AppImages.data,
                       questionsCount: quiz.questions.length,
-                      completedQuestionsCount: quiz.questionsAnswered
+                      completedQuestionsCount: quiz.questionsAnswered,
+                      onTap: () => 
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ChallengePage(questions: quiz.questions)
+                          )
+                        )
                     )
                   ).toList()
                   ?? []

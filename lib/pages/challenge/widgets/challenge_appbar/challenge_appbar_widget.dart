@@ -2,24 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
 import 'package:dev_quiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
-class ChallengeAppBar extends PreferredSize {
+class ChallengeAppBarWidget extends StatelessWidget {
   final int currentQuestion;
   final int questionsCount;
 
-  ChallengeAppBar({
+  ChallengeAppBarWidget({
     Key? key,
     required this.currentQuestion,
     required this.questionsCount
   }) 
   : assert(currentQuestion <= questionsCount),
     assert(questionsCount> 0), 
-    super(
-      key: key,
-      preferredSize: Size.fromHeight(150.0),
+    super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: true,
       child: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            BackButton(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,8 +40,9 @@ class ChallengeAppBar extends PreferredSize {
             ),
             SizedBox(height: 16.0),
             ProgressIndicatorWidget(value: currentQuestion / questionsCount)
-          ],
+          ]
         )
       )
     );
+  }
 }
