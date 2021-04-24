@@ -20,8 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _homeController.getQuizzes();
-    _homeController.getUser();
+    _homeController.loadData();
     _homeController.stateNotifier.addListener(() {
       setState((){});
     });
@@ -111,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: () => 
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => ChallengePage(questions: quiz.questions)
+                            builder: (_) => ChallengePage(quiz: quiz)
                           )
                         )
                     )

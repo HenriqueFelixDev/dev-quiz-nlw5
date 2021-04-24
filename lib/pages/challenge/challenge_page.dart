@@ -1,7 +1,9 @@
 import 'package:dev_quiz/core/app_colors.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
 import 'package:dev_quiz/pages/challenge/challenge_controller.dart';
-import 'package:dev_quiz/pages/challenge/widgets/bottom_action_button/bottom_action_button_widget.dart';
+import 'package:dev_quiz/pages/feedback/feedback_page.dart';
+import 'package:dev_quiz/shared/models/quiz/quiz_model.dart';
+import 'package:dev_quiz/shared/widgets/bottom_action_button/bottom_action_button_widget.dart';
 import 'package:dev_quiz/shared/models/quiz/answer_model.dart';
 import 'package:dev_quiz/shared/models/quiz/question_model.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +11,11 @@ import 'widgets/challenge_appbar/challenge_appbar_widget.dart';
 import 'widgets/quiz/quiz_widget.dart';
 
 class ChallengePage extends StatefulWidget {
-  final List<QuestionModel> questions;
+  final QuizModel quiz;
 
   ChallengePage({
     Key? key,
-    required this.questions
+    required this.quiz
   }) : super(key: key);
 
   @override
@@ -39,13 +41,15 @@ class _ChallengePageState extends State<ChallengePage> {
   }
 
   nextPage() {
-    if (_challengeController.currentQuestion < widget.questions.length) {
+    if (_challengeController.currentQuestion < questions.length) {
       _pageController.nextPage(
         duration: Duration(milliseconds: 200), 
         curve: Curves.decelerate
       );
     }
   }
+
+  List<QuestionModel> get questions => widget.quiz.questions;
 
   Color feedbackColor(bool isRight) => 
       isRight ? AppColors.darkGreen : AppColors.darkRed;
@@ -92,7 +96,7 @@ class _ChallengePageState extends State<ChallengePage> {
           builder: (_, value, __) {
             return ChallengeAppBarWidget(
               currentQuestion: _challengeController.currentQuestion, 
-              questionsCount: widget.questions.length
+              questionsCount: questions.length
             );
           }
         )
@@ -100,14 +104,17 @@ class _ChallengePageState extends State<ChallengePage> {
       body: PageView(
         controller: _pageController,
         physics: NeverScrollableScrollPhysics(),
-        children: widget.questions.map<Widget>(
+        children: questions.map<Widget>(
           (question) => 
             QuizWidget(
               question: question, 
               onAnswerSelect: (answer) {
                 _showFeedbackSnackbar(context, answer);
                 Future.delayed(Duration(seconds: 1))
-                  .then((_) => nextPage());
+                  .then((_) {
+                    _challengeController.updateRightAnswers(answer);
+                    nextPage();
+                  });
               },
             )
         ).toList()
@@ -120,7 +127,7 @@ class _ChallengePageState extends State<ChallengePage> {
             valueListenable: _challengeController.currentQuestionNotifier,
             builder: (_, __, ___) {
               return Visibility(
-                visible: _challengeController.currentQuestion < widget.questions.length,
+                visible: _challengeController.currentQuestion < questions.length,
                 child: BottomActionButtonWidget.white(
                   label: 'Pular', 
                   onTap: nextPage
@@ -128,7 +135,15 @@ class _ChallengePageState extends State<ChallengePage> {
                 replacement: BottomActionButtonWidget.green(
                   label: 'Confirmar', 
                   onTap: (){
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => FeedbackPage(
+                          title: widget.quiz.title,
+                          questionsCount: widget.quiz.questions.length,
+                          rightAnswersCount: _challengeController.rightAnswersCount
+                        )
+                      )
+                    );
                   }
                 ),
               );

@@ -29,6 +29,15 @@ class BottomActionButtonWidget extends StatelessWidget {
       this.borderColor = AppColors.darkGreen,
       this.textColor = AppColors.white;
 
+  BottomActionButtonWidget.purple({
+    required this.label, 
+    required this.onTap
+  })
+    : this.backgroundColor = AppColors.purple,
+      this.pressedColor = AppColors.lightGrey,
+      this.borderColor = AppColors.purple,
+      this.textColor = AppColors.white;
+
   BottomActionButtonWidget.white({
     required this.label, 
     required this.onTap

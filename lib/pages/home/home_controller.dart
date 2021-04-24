@@ -20,27 +20,17 @@ class HomeController {
   UserModel? _user;
   UserModel? get user => _user;
 
-  void getQuizzes() {
+  void loadData() {
     state = HomeState.loading;
-    _homeRepository.getQuizzes()
-      .then((quizzes) {
-        _quizzes = quizzes;
-        state = HomeState.success;
-      })
-      .catchError((e) {
-        state = HomeState.error;
-      });
-  }
-
-  void getUser() {
-    state = HomeState.loading;
-        _homeRepository.getUser()
-      .then((user) {
-        _user = user;
-        state = HomeState.success;
-      })
-      .catchError((e) {
-        state = HomeState.error;
-      });
+    Future.wait([
+      _homeRepository.getUser(),
+      _homeRepository.getQuizzes()
+    ]).then((results) {
+      _user = results[0] as UserModel;
+      _quizzes = results[1] as List<QuizModel>;
+      state = HomeState.success;
+    }).catchError((e) {
+      state = HomeState.error;
+    });
   }
 }
